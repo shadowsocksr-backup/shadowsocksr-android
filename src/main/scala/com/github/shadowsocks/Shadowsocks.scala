@@ -484,7 +484,7 @@ class Shadowsocks extends AppCompatActivity with ServiceBoundContext {
 
 
   private def updatePreferenceScreen(profile: Profile) {
-    preferences.update(profile)
+    preferences.setProfile(profile)
   }
 
   override def onStart() {
