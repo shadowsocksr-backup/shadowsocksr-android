@@ -21,3 +21,7 @@
 	path = src/main/jni/pdnsd
 	url = https://github.com/shadowsocks/pdnsd.git
 	branch = shadowsocks-android
+[submodule "src/main/jni/shadowsocks-libev"]
+	path = src/main/jni/shadowsocks-libev
+	url = https://github.com/glzjin/shadowsocks-libev.git
+	branch = master
