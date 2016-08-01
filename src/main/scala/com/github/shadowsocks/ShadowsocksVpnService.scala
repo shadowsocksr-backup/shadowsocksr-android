@@ -245,6 +245,9 @@ class ShadowsocksVpnService extends VpnService with BaseService {
       , "-b", "127.0.0.1"
       , "-l", "8163"
       , "-L", "8.8.8.8:53"
+      , "-O", profile.protocol
+      , "-o", profile.obfs
+      , "-g", profile.obfs_param
       , "-P", getApplicationInfo.dataDir
       , "-c", getApplicationInfo.dataDir + "/ss-tunnel-vpn.conf")
 
