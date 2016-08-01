@@ -212,6 +212,9 @@ class ShadowsocksVpnService extends VpnService with BaseService {
     cmd += (getApplicationInfo.dataDir + "/ss-local", "-V", "-u"
       , "-b", "127.0.0.1"
       , "-t", "600"
+      , "-O", profile.protocol
+      , "-o", profile.obfs
+      , "-g", profile.obfs_param
       , "-P", getApplicationInfo.dataDir
       , "-c", getApplicationInfo.dataDir + "/ss-local-vpn.conf")
 

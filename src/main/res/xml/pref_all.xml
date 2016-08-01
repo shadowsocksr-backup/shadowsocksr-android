@@ -63,6 +63,7 @@
         <SwitchPreference
                 android:key="isAuth"
                 android:persistent="false"
+                android:visibility="gone"
                 android:summary="@string/onetime_auth_summary"
                 android:title="@string/onetime_auth"/>
 

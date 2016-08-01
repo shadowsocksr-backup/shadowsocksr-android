@@ -95,6 +95,9 @@ class ShadowsocksNatService extends BaseService {
     cmd += (getApplicationInfo.dataDir + "/ss-local"
           , "-b" , "127.0.0.1"
           , "-t" , "600"
+          , "-O", profile.protocol
+          , "-o", profile.obfs
+          , "-g", profile.obfs_param
           , "-P", getApplicationInfo.dataDir
           , "-c" , getApplicationInfo.dataDir + "/ss-local-nat.conf")
 
