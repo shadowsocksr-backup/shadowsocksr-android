@@ -392,6 +392,7 @@ final class ProfileManagerActivity extends AppCompatActivity with OnMenuItemClic
         val profiles_ssr = Parser.findAll_ssr(contents).toList
         val profiles = concat(profiles_normal,profiles_ssr)
         profiles.foreach(app.profileManager.createProfile)
+        profiles
     }
   }
 
