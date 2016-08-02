@@ -70,7 +70,7 @@ object Parser {
     }).filter(_ != null)
     
   def findAll_ssr(data: CharSequence) = pattern_ssr.findAllMatchIn(if (data == null) "" else data).map(m => try
-    decodedPattern_ssr.findFirstMatchIn(new String(Base64.decode(m.group(1), Base64.DEFAULT), "UTF-8")) match {
+    decodedPattern_ssr.findFirstMatchIn(new String(Base64.decode(m.group(1), Base64.NO_PADDING), "UTF-8")) match {
       case Some(ss) =>
         val profile = new Profile
         profile.host = ss.group(2).toLowerCase
@@ -78,9 +78,9 @@ object Parser {
         profile.protocol = ss.group(4).toLowerCase
         profile.method = ss.group(5).toLowerCase
         profile.obfs = ss.group(6).toLowerCase
-        profile.password = new String(Base64.decode(ss.group(7), Base64.DEFAULT), "UTF-8")
-        profile.obfs_param = new String(Base64.decode(ss.group(9), Base64.DEFAULT), "UTF-8")
-        profile.name = new String(Base64.decode(ss.group(11), Base64.DEFAULT), "UTF-8")
+        profile.password = new String(Base64.decode(ss.group(7), Base64.NO_PADDING), "UTF-8")
+        profile.obfs_param = new String(Base64.decode(ss.group(9), Base64.NO_PADDING), "UTF-8")
+        profile.name = new String(Base64.decode(ss.group(11), Base64.NO_PADDING), "UTF-8")
         
         profile
       case _ => null
