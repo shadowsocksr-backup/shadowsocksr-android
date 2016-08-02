@@ -388,11 +388,7 @@ final class ProfileManagerActivity extends AppCompatActivity with OnMenuItemClic
     if (requestCode == REQUEST_QRCODE && resultCode == Activity.RESULT_OK) {
       val contents = data.getStringExtra("uri")
       if (!TextUtils.isEmpty(contents))
-        val profiles_normal = Parser.findAll(contents).toList
-        val profiles_ssr = Parser.findAll_ssr(contents).toList
-        val profiles = concat(profiles_normal,profiles_ssr)
-        profiles.foreach(app.profileManager.createProfile)
-        profiles
+        Parser.findAll_ssr(contents).foreach(app.profileManager.createProfile)
     }
   }
 
