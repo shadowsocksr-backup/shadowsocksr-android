@@ -389,6 +389,7 @@ final class ProfileManagerActivity extends AppCompatActivity with OnMenuItemClic
       val contents = data.getStringExtra("uri")
       if (!TextUtils.isEmpty(contents))
         Parser.findAll_ssr(contents).foreach(app.profileManager.createProfile)
+        Parser.findAll(contents).foreach(app.profileManager.createProfile)
     }
   }
 
