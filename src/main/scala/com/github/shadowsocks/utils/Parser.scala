@@ -48,7 +48,7 @@ object Parser {
   private val decodedPattern = "(?i)^((.+?)(-auth)??:(.*)@(.+?):(\\d+?))$".r
   
   private val pattern_ssr = "(?i)ssr://([A-Za-z0-9+-/=_]+)".r
-  private val decodedPattern_ssr = "(?i)^((.*):(\\d+?):(.*):(.*):(.*):(\w*)/(.*)=(.*)&(.*)=(.*))$".r
+  private val decodedPattern_ssr = "(?i)^((.*):(\\d+?):(.*):(.*):(.*):(\\w*)/(.*)=(.*)&(.*)=(.*))$".r
 
   def findAll(data: CharSequence) = pattern.findAllMatchIn(if (data == null) "" else data).map(m => try
     decodedPattern.findFirstMatchIn(new String(Base64.decode(m.group(1), Base64.NO_PADDING), "UTF-8")) match {
