@@ -78,7 +78,7 @@ object Parser {
         profile.protocol = ss.group(4).toLowerCase
         profile.method = ss.group(5).toLowerCase
         profile.obfs = ss.group(6).toLowerCase
-        profile.password = ss.group(7)
+        profile.password = new String(Base64.decode(ss.group(7), Base64.NO_PADDING), "UTF-8")
         profile.obfs_param = new String(Base64.decode(ss.group(8), Base64.NO_PADDING), "UTF-8")
         profile.name = new String(Base64.decode(ss.group(9), Base64.NO_PADDING), "UTF-8")
         
