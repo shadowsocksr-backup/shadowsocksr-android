@@ -310,7 +310,9 @@ final class ProfileManagerActivity extends AppCompatActivity with OnMenuItemClic
       case R.id.fab_import_add =>
         menu.toggle(true)
         if (clipboard.hasPrimaryClip) {
-          val profiles = Parser.findAll(clipboard.getPrimaryClip.getItemAt(0).getText)
+          val profiles_normal = Parser.findAll(clipboard.getPrimaryClip.getItemAt(0).getText).toList
+          val profiles_ssr = Parser.findAll_ssr(clipboard.getPrimaryClip.getItemAt(0).getText).toList
+          val profiles = concat(profiles_normal,profiles_ssr)
           if (profiles.nonEmpty) {
             profiles.foreach(app.profileManager.createProfile)
             Toast.makeText(this, R.string.action_import_msg, Toast.LENGTH_SHORT).show
@@ -349,7 +351,9 @@ final class ProfileManagerActivity extends AppCompatActivity with OnMenuItemClic
       case _ => null
     }
     if (TextUtils.isEmpty(sharedStr)) return
-    val profiles = Parser.findAll(sharedStr).toList
+    val profiles_normal = Parser.findAll(clipboard.getPrimaryClip.getItemAt(0).getText).toList
+    val profiles_ssr = Parser.findAll_ssr(clipboard.getPrimaryClip.getItemAt(0).getText).toList
+    val profiles = profiles_ssr union profiles_normal
     if (profiles.isEmpty) {
       finish()
       return
@@ -384,7 +388,10 @@ final class ProfileManagerActivity extends AppCompatActivity with OnMenuItemClic
     if (requestCode == REQUEST_QRCODE && resultCode == Activity.RESULT_OK) {
       val contents = data.getStringExtra("uri")
       if (!TextUtils.isEmpty(contents))
-        Parser.findAll(contents).foreach(app.profileManager.createProfile)
+        val profiles_normal = Parser.findAll(contents).toList
+        val profiles_ssr = Parser.findAll_ssr(contents).toList
+        val profiles = concat(profiles_normal,profiles_ssr)
+        profiles.foreach(app.profileManager.createProfile)
     }
   }
 
