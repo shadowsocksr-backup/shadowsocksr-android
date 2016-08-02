@@ -218,7 +218,6 @@ class ShadowsocksVpnService extends VpnService with BaseService {
       , "-P", getApplicationInfo.dataDir
       , "-c", getApplicationInfo.dataDir + "/ss-local-vpn.conf")
 
-    if (profile.auth) cmd += "-A"
 
     if (profile.route != Route.ALL) {
       cmd += "--acl"
@@ -248,7 +247,6 @@ class ShadowsocksVpnService extends VpnService with BaseService {
       , "-P", getApplicationInfo.dataDir
       , "-c", getApplicationInfo.dataDir + "/ss-tunnel-vpn.conf")
 
-    if (profile.auth) cmd += "-A"
 
     if (BuildConfig.DEBUG) Log.d(TAG, cmd.mkString(" "))
 

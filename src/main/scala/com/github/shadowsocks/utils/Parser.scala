@@ -46,17 +46,42 @@ object Parser {
   val TAG = "ShadowParser"
   private val pattern = "(?i)ss://([A-Za-z0-9+-/=_]+)".r
   private val decodedPattern = "(?i)^((.+?)(-auth)??:(.*)@(.+?):(\\d+?))$".r
+  
+  private val pattern_ssr = "(?i)ssr://([A-Za-z0-9+-/=_?]+)".r
+  private val decodedPattern_ssr = "(?i)^((.+?):(\\d+?):(.+?):(.+?):(.+?):(.+?)/?obfsparam=(.+?)&remarks=(.+?))$".r
 
   def findAll(data: CharSequence) = pattern.findAllMatchIn(if (data == null) "" else data).map(m => try
     decodedPattern.findFirstMatchIn(new String(Base64.decode(m.group(1), Base64.NO_PADDING), "UTF-8")) match {
       case Some(ss) =>
         val profile = new Profile
         profile.method = ss.group(2).toLowerCase
-        if (ss.group(3) != null) profile.auth = true
+        if (ss.group(3) != null) profile.protocol = "verify_sha1"
         profile.password = ss.group(4)
         profile.name = ss.group(5)
         profile.host = profile.name
         profile.remotePort = ss.group(6).toInt
+        profile
+      case _ => null
+    }
+    catch {
+      case ex: Exception =>
+        Log.e(TAG, "parser error: " + m.source, ex)// Ignore
+        null
+    }).filter(_ != null)
+    
+  def findAll(data: CharSequence) = pattern_ssr.findAllMatchIn(if (data == null) "" else data).map(m => try
+    decodedPattern_ssr.findFirstMatchIn(new String(Base64.decode(m.group(1), Base64.NO_PADDING), "UTF-8")) match {
+      case Some(ss) =>
+        val profile = new Profile
+        profile.host = ss.group(2).toLowerCase
+        profile.remotePort = ss.group(3).toInt
+        profile.protocol = ss.group(4).toLowerCase
+        profile.method = ss.group(5).toLowerCase
+        profile.obfs = ss.group(6).toLowerCase
+        profile.password = ss.group(7)
+        profile.obfs_param = new String(Base64.decode(ss.group(8), Base64.NO_PADDING), "UTF-8")
+        profile.name = new String(Base64.decode(m.group(9), Base64.NO_PADDING), "UTF-8")
+        
         profile
       case _ => null
     }

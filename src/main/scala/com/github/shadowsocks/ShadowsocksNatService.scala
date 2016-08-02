@@ -101,7 +101,6 @@ class ShadowsocksNatService extends BaseService {
           , "-P", getApplicationInfo.dataDir
           , "-c" , getApplicationInfo.dataDir + "/ss-local-nat.conf")
 
-    if (profile.auth) cmd += "-A"
 
     if (profile.route != Route.ALL) {
       cmd += "--acl"
@@ -131,7 +130,6 @@ class ShadowsocksNatService extends BaseService {
 
       cmd += ("-l" , "8153")
 
-      if (profile.auth) cmd += "-A"
 
       if (BuildConfig.DEBUG) Log.d(TAG, cmd.mkString(" "))
 
@@ -154,7 +152,6 @@ class ShadowsocksNatService extends BaseService {
         , "-P", getApplicationInfo.dataDir
         , "-c" , getApplicationInfo.dataDir + "/ss-tunnel-nat.conf")
 
-      if (profile.auth) cmdBuf += "-A"
 
       if (BuildConfig.DEBUG) Log.d(TAG, cmdBuf.mkString(" "))
 
