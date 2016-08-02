@@ -48,7 +48,7 @@ object Parser {
   private val decodedPattern = "(?i)^((.+?)(-auth)??:(.*)@(.+?):(\\d+?))$".r
   
   private val pattern_ssr = "(?i)ssr://([A-Za-z0-9+-/=_]+)".r
-  private val decodedPattern_ssr = "(?i)^((.*):(\\d+?):(.*):(.*):(.*):(\\w*)/(.*)=(.*)&(.*)=(.*))$".r
+  private val decodedPattern_ssr = "(?i)^((.*):(\\d+?):(.*):(.*):(.*):(.*)/(.*)=(.*)&(.*)=(.*))$".r
 
   def findAll(data: CharSequence) = pattern.findAllMatchIn(if (data == null) "" else data).map(m => try
     decodedPattern.findFirstMatchIn(new String(Base64.decode(m.group(1), Base64.NO_PADDING), "UTF-8")) match {
@@ -78,7 +78,6 @@ object Parser {
         profile.protocol = ss.group(4).toLowerCase
         profile.method = ss.group(5).toLowerCase
         profile.obfs = ss.group(6).toLowerCase
-		println(ss.group(7))
         profile.password = new String(Base64.decode(ss.group(7), Base64.DEFAULT), "UTF-8")
         profile.obfs_param = new String(Base64.decode(ss.group(9), Base64.DEFAULT), "UTF-8")
         profile.name = new String(Base64.decode(ss.group(11), Base64.DEFAULT), "UTF-8")

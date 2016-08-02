@@ -351,8 +351,8 @@ final class ProfileManagerActivity extends AppCompatActivity with OnMenuItemClic
       case _ => null
     }
     if (TextUtils.isEmpty(sharedStr)) return
-    val profiles_normal = Parser.findAll(clipboard.getPrimaryClip.getItemAt(0).getText).toList
-    val profiles_ssr = Parser.findAll_ssr(clipboard.getPrimaryClip.getItemAt(0).getText).toList
+    val profiles_normal = Parser.findAll(sharedStr).toList
+    val profiles_ssr = Parser.findAll_ssr(sharedStr).toList
     val profiles = profiles_ssr ::: profiles_normal
     if (profiles.isEmpty) {
       finish()
