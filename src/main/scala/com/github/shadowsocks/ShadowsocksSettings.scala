@@ -54,7 +54,7 @@ object ShadowsocksSettings {
       case Key.method => updateDropDownPreference(pref, profile.method)
       case Key.protocol => updateDropDownPreference(pref, profile.protocol)
       case Key.obfs => updateDropDownPreference(pref, profile.obfs)
-	  case Key.obfs_param => updateSummaryEditTextPreference(pref, profile.obfs_param)
+      case Key.obfs_param => updateSummaryEditTextPreference(pref, profile.obfs_param)
       case Key.route => updateDropDownPreference(pref, profile.route)
       case Key.proxyApps => updateSwitchPreference(pref, profile.proxyApps)
       case Key.udpdns => updateSwitchPreference(pref, profile.udpdns)
@@ -100,15 +100,15 @@ class ShadowsocksSettings extends PreferenceFragment with OnSharedPreferenceChan
       profile.method = value.asInstanceOf[String]
       app.profileManager.updateProfile(profile)
     })
-	findPreference(Key.protocol).setOnPreferenceChangeListener((_, value) => {
+    findPreference(Key.protocol).setOnPreferenceChangeListener((_, value) => {
       profile.protocol = value.asInstanceOf[String]
       app.profileManager.updateProfile(profile)
     })
-	findPreference(Key.obfs).setOnPreferenceChangeListener((_, value) => {
+    findPreference(Key.obfs).setOnPreferenceChangeListener((_, value) => {
       profile.obfs = value.asInstanceOf[String]
       app.profileManager.updateProfile(profile)
     })
-	findPreference(Key.obfs_param).setOnPreferenceChangeListener((_, value) => {
+    findPreference(Key.obfs_param).setOnPreferenceChangeListener((_, value) => {
       profile.obfs_param = value.asInstanceOf[String]
       app.profileManager.updateProfile(profile)
     })

@@ -310,9 +310,7 @@ final class ProfileManagerActivity extends AppCompatActivity with OnMenuItemClic
       case R.id.fab_import_add =>
         menu.toggle(true)
         if (clipboard.hasPrimaryClip) {
-          val profiles_normal = Parser.findAll(clipboard.getPrimaryClip.getItemAt(0).getText).toList
-          val profiles_ssr = Parser.findAll_ssr(clipboard.getPrimaryClip.getItemAt(0).getText).toList
-          val profiles = profiles_normal ::: profiles_ssr
+          val profiles = Parser.findAll_ssr(clipboard.getPrimaryClip.getItemAt(0).getText).toList
           if (profiles.nonEmpty) {
             profiles.foreach(app.profileManager.createProfile)
             Toast.makeText(this, R.string.action_import_msg, Toast.LENGTH_SHORT).show
@@ -351,9 +349,7 @@ final class ProfileManagerActivity extends AppCompatActivity with OnMenuItemClic
       case _ => null
     }
     if (TextUtils.isEmpty(sharedStr)) return
-    val profiles_normal = Parser.findAll(clipboard.getPrimaryClip.getItemAt(0).getText).toList
-    val profiles_ssr = Parser.findAll_ssr(clipboard.getPrimaryClip.getItemAt(0).getText).toList
-    val profiles = profiles_ssr ::: profiles_normal
+    val profiles = Parser.findAll_ssr(clipboard.getPrimaryClip.getItemAt(0).getText).toList
     if (profiles.isEmpty) {
       finish()
       return
