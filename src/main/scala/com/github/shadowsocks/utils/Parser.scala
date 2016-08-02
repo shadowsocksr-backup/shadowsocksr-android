@@ -70,7 +70,6 @@ object Parser {
     }).filter(_ != null)
     
   def findAll_ssr(data: CharSequence) = pattern_ssr.findAllMatchIn(if (data == null) "" else data).map(m => try
-	Console.print(new String(Base64.decode(m.group(1), Base64.NO_PADDING), "UTF-8"))
     decodedPattern_ssr.findFirstMatchIn(new String(Base64.decode(m.group(1), Base64.NO_PADDING), "UTF-8")) match {
       case Some(ss) =>
         val profile = new Profile
