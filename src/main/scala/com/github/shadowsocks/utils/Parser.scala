@@ -87,7 +87,7 @@ object Parser {
         }
         
         val textB = ss.group(2)
-        val textB_Array = textA.split("&")
+        val textB_Array = textB.split("&")
         
         for ( textX <- textB_Array ) {
             val textX_Array = textX.split("=",2)
