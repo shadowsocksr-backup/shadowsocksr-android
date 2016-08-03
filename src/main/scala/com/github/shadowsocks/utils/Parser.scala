@@ -82,7 +82,7 @@ object Parser {
             profile.protocol = textA_Array(2).toLowerCase
             profile.method = textA_Array(3).toLowerCase
             profile.obfs = textA_Array(4).toLowerCase
-            profile.password = new String(Base64.decode(textA_Array(5), Base64.NO_PADDING | Base64.NO_WRAP), "UTF-8")
+            profile.password = new String(Base64.decode(textA_Array(5), Base64.DEFAULT), "UTF-8")
         }
         
         val textB = ss.group(2)
@@ -93,8 +93,8 @@ object Parser {
             if(textX_Array.length == 2)
             {
                 textX_Array(0) match {
-                  case "obfsparam"  => profile.obfs_param = new String(Base64.decode(textX_Array(1), Base64.NO_PADDING | Base64.NO_WRAP), "UTF-8")
-                  case "remark"  => profile.name = new String(Base64.decode(textX_Array(1), Base64.NO_PADDING | Base64.NO_WRAP), "UTF-8")
+                  case "obfsparam"  => profile.obfs_param = new String(Base64.decode(textX_Array(1), Base64.DEFAULT), "UTF-8")
+                  case "remark"  => profile.name = new String(Base64.decode(textX_Array(1), Base64.DEFAULT), "UTF-8")
                 }
             }
         }
