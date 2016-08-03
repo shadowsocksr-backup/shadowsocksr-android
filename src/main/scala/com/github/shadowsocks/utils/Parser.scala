@@ -71,30 +71,31 @@ object Parser {
         null
     }).filter(_ != null)
 
-  def findAll_ssr(data: CharSequence) = pattern_ssr.findAllMatchIn(if (data == null) "" else data).map(m => try
+  def findAll_ssr(data: CharSequence) = pattern_ssr.findAllMatchIn(if (data == null) "" else data).map(m => try{
     val uri = new String(Base64.decode(m.group(1), Base64.NO_PADDING | Base64.URL_SAFE), "UTF-8")
     decodedPattern_ssr.findFirstMatchIn(uri) match {
-      case Some(ss) =>
-        val profile = new Profile
-        profile.host = ss.group(2).toLowerCase
-        profile.remotePort = ss.group(3).toInt
-        profile.protocol = ss.group(4).toLowerCase
-        profile.method = ss.group(5).toLowerCase
-        profile.obfs = ss.group(6).toLowerCase
-        profile.password = new String(Base64.decode(ss.group(7), Base64.NO_PADDING | Base64.URL_SAFE), "UTF-8")
+          case Some(ss) =>
+            val profile = new Profile
+            profile.host = ss.group(2).toLowerCase
+            profile.remotePort = ss.group(3).toInt
+            profile.protocol = ss.group(4).toLowerCase
+            profile.method = ss.group(5).toLowerCase
+            profile.obfs = ss.group(6).toLowerCase
+            profile.password = new String(Base64.decode(ss.group(7), Base64.NO_PADDING | Base64.URL_SAFE), "UTF-8")
 
-        decodedPattern_ssr_obfsparam.findFirstMatchIn(uri) match {
-          case Some(param) =>
-            profile.obfs_param = new String(Base64.decode(param.group(1), Base64.NO_PADDING | Base64.URL_SAFE), "UTF-8")
+            decodedPattern_ssr_obfsparam.findFirstMatchIn(uri) match {
+              case Some(param) =>
+                profile.obfs_param = new String(Base64.decode(param.group(1), Base64.NO_PADDING | Base64.URL_SAFE), "UTF-8")
+            }
+
+            decodedPattern_ssr_remarks.findFirstMatchIn(uri) match {
+              case Some(param) =>
+                profile.name = new String(Base64.decode(param.group(1), Base64.NO_PADDING | Base64.URL_SAFE), "UTF-8")
+            }
+
+            profile
+          case _ => null
         }
-
-        decodedPattern_ssr_remarks.findFirstMatchIn(uri) match {
-          case Some(param) =>
-            profile.name = new String(Base64.decode(param.group(1), Base64.NO_PADDING | Base64.URL_SAFE), "UTF-8")
-        }
-
-        profile
-      case _ => null
     }
     catch {
       case ex: Exception =>
