@@ -48,7 +48,7 @@ object Parser {
   private val decodedPattern = "(?i)^((.+?)(-auth)??:(.*)@(.+?):(\\d+?))$".r
 
   private val pattern_ssr = "(?i)ssr://([A-Za-z0-9_=-]+)".r
-  private val decodedPattern_ssr = "(?i)^((.+):(\\d+?):(.*):(.+):(.*):([^/]+)".r
+  private val decodedPattern_ssr = "(?i)^((.+):(\\d+?):(.*):(.+):(.*):([^/]+))".r
   private val decodedPattern_ssr_obfsparam = "(?i)[?&]obfsparam=([A-Za-z0-9_=-]*)".r
   private val decodedPattern_ssr_remarks = "(?i)[?&]remarks=([A-Za-z0-9_=-]*)".r
 
