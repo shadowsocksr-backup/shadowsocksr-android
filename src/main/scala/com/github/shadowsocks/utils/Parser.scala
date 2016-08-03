@@ -89,7 +89,7 @@ object Parser {
 		val textB_Array = textA.split("&")
 		
 		for ( textX <- textB_Array ) {
-			textX_Array = textX.split("=",2)
+			val textX_Array = textX.split("=",2)
 			if(textX_Array.length == 2)
 			{
 				textX_Array(0) match {
