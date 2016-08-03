@@ -69,11 +69,11 @@ object Parser {
         null
     }).filter(_ != null)
     
-  def findAll_ssr(data: CharSequence) = pattern_ssr.findAllMatchIn(if (data == null) "" else data).map(m => try
-    decodedPattern_ssr.findFirstMatchIn(new String(Base64.decode(m.group(1), Base64.URL_SAFE), "UTF-8")) match {
-      case Some(ss) =>
+  def findAll_ssr(data: CharSequence) = pattern_ssr.findAllMatchIn(if (data == null) "" else data).map(m => try{
+        val m_Array = m.split("/?")
+        
         val profile = new Profile
-        val textA = ss.group(1)
+        val textA = m_Array(0)
         val textA_Array = textA.split(":")
         if(textA_Array.length == 6)
         {
@@ -86,7 +86,7 @@ object Parser {
             profile.password = textA_Array(5)
         }
         
-        val textB = ss.group(2)
+        val textB = m_Array(1)
         val textB_Array = textB.split("&")
         
         for ( textX <- textB_Array ) {
@@ -102,7 +102,6 @@ object Parser {
         }
         
         profile
-      case _ => null
     }
     catch {
       case ex: Exception =>
