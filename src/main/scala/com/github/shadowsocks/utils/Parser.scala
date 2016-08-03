@@ -96,6 +96,7 @@ object Parser {
                 textX_Array(0) match {
                   case "obfsparam"  => profile.obfs_param = new String(Base64.decode(textX_Array(1), Base64.URL_SAFE), "UTF-8")
                   case "remark"  => profile.name = new String(Base64.decode(textX_Array(1), Base64.URL_SAFE), "UTF-8")
+                  case _ => null
                 }
             }
         }
