@@ -82,7 +82,8 @@ object Parser {
             profile.protocol = textA_Array(2).toLowerCase
             profile.method = textA_Array(3).toLowerCase
             profile.obfs = textA_Array(4).toLowerCase
-            profile.password = new String(Base64.decode(textA_Array(5), Base64.URL_SAFE), "UTF-8")
+            //profile.password = new String(Base64.decode(textA_Array(5), Base64.URL_SAFE), "UTF-8")
+            profile.password = textA_Array(5)
         }
         
         val textB = ss.group(2)
