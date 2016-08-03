@@ -69,8 +69,9 @@ object Parser {
         null
     }).filter(_ != null)
     
-  def findAll_ssr(data: CharSequence) = pattern_ssr.findAllMatchIn(if (data == null) "" else data).map(m => try{
-        val m_Array = m.split("/?")
+  def findAll_ssr(data: CharSequence) = try{
+		val data_Array = data.split("ssr://")
+        val m_Array = data_Array(1).split("/?")
         
         val profile = new Profile
         val textA = m_Array(0)
