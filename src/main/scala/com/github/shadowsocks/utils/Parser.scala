@@ -73,7 +73,7 @@ object Parser {
     decodedPattern_ssr.findFirstMatchIn(new String(Base64.decode(m.group(1), Base64.URL_SAFE), "UTF-8")) match {
       case Some(ss) =>
         val profile = new Profile
-        val textA = ss.group(2)
+        val textA = ss.group(1)
         val textA_Array = textA.split(":")
         if(textA_Array.length == 6)
         {
@@ -85,7 +85,7 @@ object Parser {
             profile.password = new String(Base64.decode(textA_Array(5), Base64.DEFAULT), "UTF-8")
         }
         
-        val textB = ss.group(4)
+        val textB = ss.group(2)
         val textB_Array = textA.split("&")
         
         for ( textX <- textB_Array ) {
