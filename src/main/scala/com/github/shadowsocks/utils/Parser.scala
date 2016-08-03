@@ -48,7 +48,7 @@ object Parser {
   private val decodedPattern = "(?i)^((.+?)(-auth)??:(.*)@(.+?):(\\d+?))$".r
   
   private val pattern_ssr = "(?i)ssr://([A-Za-z0-9+-/=_]+)".r
-  private val decodedPattern_ssr = """(.*)/\?(.*)""".r
+  private val decodedPattern_ssr = "(?i)^((.*)/(.*))$".r
 
   def findAll(data: CharSequence) = pattern.findAllMatchIn(if (data == null) "" else data).map(m => try
     decodedPattern.findFirstMatchIn(new String(Base64.decode(m.group(1), Base64.NO_PADDING), "UTF-8")) match {
@@ -73,7 +73,7 @@ object Parser {
     decodedPattern_ssr.findFirstMatchIn(new String(Base64.decode(m.group(1), Base64.URL_SAFE), "UTF-8")) match {
       case Some(ss) =>
         val profile = new Profile
-        val textA = ss.group(0)
+        val textA = ss.group(1)
         val textA_Array = textA.split(":")
         if(textA_Array.length == 6)
         {
@@ -86,7 +86,7 @@ object Parser {
             profile.password = textA_Array(5)
         }
         
-        val textB = ss.group(1)
+        val textB = ss.group(2)
         val textB_Array = textB.split("&")
         
         for ( textX <- textB_Array ) {
