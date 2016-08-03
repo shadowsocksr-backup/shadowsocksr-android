@@ -70,7 +70,7 @@ object Parser {
     }).filter(_ != null)
     
   def findAll_ssr(data: CharSequence) = try{
-		val data_Array = data.split("ssr://")
+        val data_Array = data.split("ssr://")
         val m_Array = data_Array(1).split("/?")
         
         val profile = new Profile
@@ -108,5 +108,5 @@ object Parser {
       case ex: Exception =>
         Log.e(TAG, "parser error: " + m.source, ex)// Ignore
         null
-    }).filter(_ != null)
+    }
 }
