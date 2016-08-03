@@ -46,9 +46,6 @@ object Parser {
   val TAG = "ShadowParser"
   private val pattern = "(?i)ss://([A-Za-z0-9+-/=_]+)".r
   private val decodedPattern = "(?i)^((.+?)(-auth)??:(.*)@(.+?):(\\d+?))$".r
-  
-  private val pattern_ssr = "(?i)ssr://([A-Za-z0-9+-/=_]+)".r
-  private val decodedPattern_ssr = "(?i)^((.*)/?(.*))$".r
 
   def findAll(data: CharSequence) = pattern.findAllMatchIn(if (data == null) "" else data).map(m => try
     decodedPattern.findFirstMatchIn(new String(Base64.decode(m.group(1), Base64.NO_PADDING), "UTF-8")) match {
@@ -71,38 +68,41 @@ object Parser {
     
   def findAll_ssr(data: CharSequence) = try{
         val data_Array = data.split("ssr://")
-        val m_Array = data_Array(1).split("/?")
-        
-        val profile = new Profile
-        val textA = m_Array(0)
-        val textA_Array = textA.split(":")
-        if(textA_Array.length == 6)
+        if(data_Array.length == 2)
         {
-            profile.host = textA_Array(0).toLowerCase
-            profile.remotePort = textA_Array(1).toInt
-            profile.protocol = textA_Array(2).toLowerCase
-            profile.method = textA_Array(3).toLowerCase
-            profile.obfs = textA_Array(4).toLowerCase
-            //profile.password = new String(Base64.decode(textA_Array(5), Base64.URL_SAFE), "UTF-8")
-            profile.password = textA_Array(5)
-        }
-        
-        val textB = m_Array(1)
-        val textB_Array = textB.split("&")
-        
-        for ( textX <- textB_Array ) {
-            val textX_Array = textX.split("=",2)
-            if(textX_Array.length == 2)
+            val m_Array = data_Array(1).split("/?")
+            
+            val profile = new Profile
+            val textA = m_Array(0)
+            val textA_Array = textA.split(":")
+            if(textA_Array.length == 6)
             {
-                textX_Array(0) match {
-                  case "obfsparam"  => profile.obfs_param = new String(Base64.decode(textX_Array(1), Base64.URL_SAFE), "UTF-8")
-                  case "remark"  => profile.name = new String(Base64.decode(textX_Array(1), Base64.URL_SAFE), "UTF-8")
-                  case _ => null
+                profile.host = textA_Array(0).toLowerCase
+                profile.remotePort = textA_Array(1).toInt
+                profile.protocol = textA_Array(2).toLowerCase
+                profile.method = textA_Array(3).toLowerCase
+                profile.obfs = textA_Array(4).toLowerCase
+                //profile.password = new String(Base64.decode(textA_Array(5), Base64.URL_SAFE), "UTF-8")
+                profile.password = textA_Array(5)
+            }
+            
+            val textB = m_Array(1)
+            val textB_Array = textB.split("&")
+            
+            for ( textX <- textB_Array ) {
+                val textX_Array = textX.split("=",2)
+                if(textX_Array.length == 2)
+                {
+                    textX_Array(0) match {
+                      case "obfsparam"  => profile.obfs_param = new String(Base64.decode(textX_Array(1), Base64.URL_SAFE), "UTF-8")
+                      case "remark"  => profile.name = new String(Base64.decode(textX_Array(1), Base64.URL_SAFE), "UTF-8")
+                      case _ => null
+                    }
                 }
             }
-        }
         
         profile
+        }
     }
     catch {
       case ex: Exception =>
