@@ -109,7 +109,7 @@ class Profile {
     host, remotePort, protocol, method, obfs, Base64.encodeToString("%s".formatLocal(Locale.ENGLISH,
     password).getBytes, Base64.NO_PADDING | Base64.NO_WRAP), Base64.encodeToString("%s".formatLocal(Locale.ENGLISH,
     obfs_param).getBytes, Base64.NO_PADDING | Base64.NO_WRAP), Base64.encodeToString("%s".formatLocal(Locale.ENGLISH,
-    name).getBytes, Base64.NO_PADDING | Base64.NO_WRAP)).getBytes, Base64.NO_PADDING | Base64.NO_WRAP)
+    name).getBytes, Base64.NO_PADDING | Base64.NO_WRAP)).getBytes, Base64.URL_SAFE)
 
   def isMethodUnsafe = "table".equalsIgnoreCase(method) || "rc4".equalsIgnoreCase(method)
 }
