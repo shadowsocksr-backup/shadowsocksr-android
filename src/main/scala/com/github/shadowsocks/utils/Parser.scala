@@ -86,11 +86,13 @@ object Parser {
             decodedPattern_ssr_obfsparam.findFirstMatchIn(uri) match {
               case Some(param) =>
                 profile.obfs_param = new String(Base64.decode(param.group(1), Base64.NO_PADDING | Base64.URL_SAFE), "UTF-8")
+              case _ => null
             }
 
             decodedPattern_ssr_remarks.findFirstMatchIn(uri) match {
               case Some(param) =>
                 profile.name = new String(Base64.decode(param.group(1), Base64.NO_PADDING | Base64.URL_SAFE), "UTF-8")
+              case _ => null
             }
 
             profile
