@@ -109,7 +109,7 @@ class Profile {
     host, remotePort, protocol, method, obfs, Base64.encodeToString("%s".formatLocal(Locale.ENGLISH,
     password).getBytes, Base64.DEFAULT), Base64.encodeToString("%s".formatLocal(Locale.ENGLISH,
     obfs_param).getBytes, Base64.DEFAULT), Base64.encodeToString("%s".formatLocal(Locale.ENGLISH,
-    name).getBytes, Base64.DEFAULT)).getBytes, Base64.URL_SAFE)
+    name).getBytes, Base64.DEFAULT)).getBytes, Base64.URL_SAFE | Base64.NO_WRAP)
 
   def isMethodUnsafe = "table".equalsIgnoreCase(method) || "rc4".equalsIgnoreCase(method)
 }
