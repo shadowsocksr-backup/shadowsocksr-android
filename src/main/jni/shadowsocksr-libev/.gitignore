@@ -1,0 +1,73 @@
+build/
+.deps/
+/Makefile
+src/Makefile
+libev/Makefile
+libudns/Makefile
+libcork/Makefile
+libipset/Makefile
+doc/Makefile
+autom4te.cache/
+/config.h
+config.log
+config.status
+libtool
+pid
+src/ss-*
+!src/ss-nat
+stamp-h1
+.libs
+.pc
+debian/shadowsocks-libev/
+debian/patches/
+debian/files
+debian/shadowsocks-libev.substvars
+debian/*.debhelper*
+.dirstamp
+shadowsocks-libev.pc
+debian/libshadowsocks-libev*.symbols
+libsodium/src/libsodium/include/sodium/version.h
+rpm/SPECS/shadowsocks-libev.spec
+
+# Ignore per-project vim config
+.vimrc
+
+# Ignore garbage of OS X
+*.DS_Store
+
+# Ignore vim cache
+*.swp
+
+# Documentation files
+doc/*.1
+doc/*.8
+doc/*.gz
+doc/*.xml
+doc/*.html
+
+#	Do not edit the following section
+# 	Edit Compile Debug Document Distribute
+*~
+*.bak
+*.bin
+*.dll
+*.exe
+*-ISO*.bdf
+*-JIS*.bdf
+*-KOI8*.bdf
+*.kld
+*.ko
+*.ko.cmd
+*.lai
+*.l[oa]
+*.[oa]
+*.obj
+*.patch
+*.so
+*.pcf.gz
+*.pdb
+*.tar.bz2
+*.tar.gz
+#
+cmake-build*
+.idea/
