@@ -1,5 +1,11 @@
 language: scala
 
+# safelist
+branches:
+  only:
+  - test
+  - stable
+  
 jdk:
   - oraclejdk8
 
